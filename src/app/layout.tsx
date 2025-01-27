@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { AuthKitProvider } from "@workos-inc/authkit-nextjs/components";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Theme, Container, ThemePanel } from "@radix-ui/themes";
+
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Theme appearance="dark">
+          <AuthKitProvider>
+            <Container>{children}</Container>
+            <ThemePanel />
+          </AuthKitProvider>
+        </Theme>
       </body>
     </html>
   );
